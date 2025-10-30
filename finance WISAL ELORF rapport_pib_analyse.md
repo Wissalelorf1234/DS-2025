@@ -2,6 +2,7 @@
 ## Comparaison Internationale Multi-Pays
 
 ---WISAL ELORF
+<img width="286" height="404" alt="Capture d’écran 2025-05-14 152912" src="https://github.com/user-attachments/assets/b70d9eba-a1cf-4072-9467-d41983bcd44c" />
 
 ## 1. INTRODUCTION
 
