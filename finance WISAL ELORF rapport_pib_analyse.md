@@ -539,6 +539,7 @@ print("\n✓ Analyse de l'évolution temporelle terminée")
 ### 4.4 Analyse des taux de croissance annuels
 
 **Explication préliminaire** : Les taux de croissance annuels révèlent les cycles économiques, les chocs et la résilience des économies.
+<img width="1389" height="989" alt="image" src="https://github.com/user-attachments/assets/8fab99bb-7a6a-42f2-bbf4-205e81be9528" />
 
 ```python
 # Statistiques sur les taux de croissance
