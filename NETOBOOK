@@ -1,317 +1,60 @@
-\documentclass[12pt,a4paper]{article}
-
-% Packages
-\usepackage[utf8]{inputenc}
-\usepackage[french]{babel}
-\usepackage[T1]{fontenc}
-\usepackage{geometry}
-\usepackage{graphicx}
-\usepackage{hyperref}
-\usepackage{fancyhdr}
-\usepackage{titlesec}
-\usepackage{enumitem}
-\usepackage{xcolor}
-\usepackage{tcolorbox}
-\usepackage{booktabs}
-\usepackage{caption}
-
-% Configuration de la page
-\geometry{left=2.5cm, right=2.5cm, top=3cm, bottom=3cm}
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[L]{Compte Rendu}
-\fancyhead[R]{Maladies Cardiaques}
-\fancyfoot[C]{\thepage}
-
-% Couleurs
-\definecolor{maincolor}{RGB}{41,128,185}
-\definecolor{seccolor}{RGB}{231,76,60}
-
-% Configuration des sections
-\titleformat{\section}{\Large\bfseries\color{maincolor}}{\thesection}{1em}{}
-\titleformat{\subsection}{\large\bfseries\color{seccolor}}{\thesubsection}{1em}{}
-
-% Informations du document
-\title{\textbf{\Huge Compte Rendu\\[0.5cm]\Large Les Maladies Cardiaques}}
-\author{Votre Nom\\Votre Institution}
-\date{\today}
-
-\begin{document}
-
-\maketitle
-\thispagestyle{empty}
-
-\newpage
-\tableofcontents
-\newpage
-
-\section{Introduction}
-
-Les maladies cardiaques, également appelées maladies cardiovasculaires, constituent un ensemble de troubles affectant le cœur et les vaisseaux sanguins. Elles représentent l'une des principales causes de mortalité dans le monde, touchant des millions de personnes chaque année. Ce rapport examine de manière approfondie les différents aspects des maladies cardiaques, incluant leur typologie, les populations affectées, leur histoire médicale, ainsi que les stratégies de prévention et de traitement.
-
-\section{Définition et Types de Maladies Cardiaques}
-
-\subsection{Définition générale}
-
-Les maladies cardiovasculaires regroupent l'ensemble des pathologies affectant le système cardiovasculaire, comprenant le cœur et le réseau de vaisseaux sanguins qui irriguent l'organisme. Ces maladies peuvent résulter de divers mécanismes physiopathologiques et présentent des manifestations cliniques variées.
-
-\subsection{Classification des maladies cardiaques}
-
-\begin{tcolorbox}[colback=blue!5!white,colframe=maincolor,title=\textbf{Types principaux}]
-\begin{itemize}[leftmargin=*]
-    \item \textbf{Maladie coronarienne :} Pathologie la plus fréquente, caractérisée par l'accumulation de plaques d'athérome dans les artères coronaires, réduisant l'apport sanguin au muscle cardiaque.
-    
-    \item \textbf{Insuffisance cardiaque :} Incapacité du cœur à pomper efficacement le sang nécessaire aux besoins métaboliques de l'organisme.
-    
-    \item \textbf{Arythmies cardiaques :} Troubles du rythme cardiaque où le cœur bat de manière irrégulière, trop rapide (tachycardie) ou trop lente (bradycardie).
-    
-    \item \textbf{Valvulopathies :} Dysfonctionnements des valves cardiaques, qu'il s'agisse de rétrécissement (sténose) ou d'insuffisance valvulaire.
-    
-    \item \textbf{Cardiomyopathies :} Maladies intrinsèques du muscle cardiaque affectant sa structure et sa fonction.
-    
-    \item \textbf{Cardiopathies congénitales :} Malformations cardiaques présentes dès la naissance.
-\end{itemize}
-\end{tcolorbox}
-
-\section{Facteurs de Risque}
-
-Les facteurs de risque des maladies cardiaques se divisent en deux catégories principales.
-
-\subsection{Facteurs non modifiables}
-
-\begin{itemize}
-    \item \textbf{Âge :} Le risque augmente significativement avec l'avancement en âge
-    \item \textbf{Sexe :} Les hommes développent généralement ces pathologies plus précocement
-    \item \textbf{Antécédents familiaux :} Prédisposition génétique héréditaire
-    \item \textbf{Origine ethnique :} Certaines populations présentent des susceptibilités accrues
-\end{itemize}
-
-\subsection{Facteurs modifiables}
-
-\begin{itemize}
-    \item Hypertension artérielle
-    \item Hypercholestérolémie
-    \item Diabète sucré
-    \item Tabagisme
-    \item Obésité et surpoids
-    \item Sédentarité
-    \item Stress chronique
-    \item Alimentation déséquilibrée
-    \item Consommation excessive d'alcool
-\end{itemize}
-
-\section{Populations Impactées}
-
-\subsection{Distribution selon l'âge}
-
-Le risque de maladies cardiaques augmente exponentiellement avec l'âge. Les personnes de plus de 65 ans constituent la population la plus vulnérable. Toutefois, une tendance préoccupante révèle une augmentation des cas chez les jeunes adultes, principalement attribuable à l'épidémie d'obésité et aux modes de vie sédentaires.
-
-\subsection{Différences selon le sexe}
-
-Les hommes développent généralement des maladies cardiovasculaires dès la cinquantaine, tandis que les femmes bénéficient d'une protection hormonale relative jusqu'à la ménopause. Après cette période, leur risque s'accroît considérablement. Il convient de noter que les manifestations cliniques peuvent différer selon le sexe, entraînant parfois un sous-diagnostic chez les femmes.
-
-\subsection{Disparités ethniques et socio-économiques}
-
-\begin{tcolorbox}[colback=red!5!white,colframe=seccolor,title=\textbf{Populations à risque accru}]
-\begin{itemize}
-    \item \textbf{Populations d'origine africaine :} Prévalence élevée d'hypertension artérielle et d'insuffisance cardiaque
-    \item \textbf{Populations sud-asiatiques :} Prédisposition génétique aux maladies coronariennes avec apparition précoce
-    \item \textbf{Populations autochtones :} Taux élevés dans plusieurs contextes géographiques
-    \item \textbf{Populations défavorisées :} Impact disproportionné lié aux déterminants sociaux de la santé
-\end{itemize}
-\end{tcolorbox}
-
-\subsection{Impact sur la vie quotidienne}
-
-Les répercussions des maladies cardiaques s'étendent au-delà de la sphère physique :
-
-\textbf{Impact physique :} Réduction de la capacité à l'effort, fatigue chronique, hospitalisations récurrentes, risque d'événements aigus potentiellement mortels.
-
-\textbf{Impact psychologique :} Anxiété, dépression, peur persistante de récidive, perte d'autonomie, isolement social.
-
-\textbf{Impact économique :} Coûts médicaux substantiels, perte de revenus professionnels, charges financières familiales accrues.
-
-\textbf{Impact familial :} Réorganisation de la dynamique familiale, rôle de soignant, stress émotionnel collectif.
-
-\section{Histoire et Découvertes Médicales}
-
-\subsection{Origines anciennes}
-
-Les premières études médicales documentées sur le cœur remontent à l'Égypte ancienne, notamment dans le papyrus d'Ebers (environ 1550 avant J.-C.). La collection hippocratique (5\textsuperscript{ème} siècle avant J.-C.) incluait un traité intitulé "De corde", bien que ces textes traitassent principalement d'anatomie plutôt que de pathologies.
-
-\subsection{Contributions grecques}
-
-Érasistrate, médecin de l'école d'Alexandrie, découvrit l'existence des valves cardiaques grâce aux techniques de dissection humaine. Hippocrate décrivit l'angine de poitrine avec une précision remarquable : "la poitrine serrée par une griffe et certains malades se courbent en avant".
-
-\subsection{Révolution moderne - William Harvey (1628)}
-
-Le début de la cardiologie moderne peut être daté de 1628, lorsque le médecin anglais William Harvey publia sa découverte révolutionnaire sur la circulation sanguine. Cette avancée fondamentale transforma la compréhension du système cardiovasculaire.
-
-\subsection{Première chirurgie cardiaque (1896)}
-
-Le 9 septembre 1896 à Francfort (Empire Allemand), le Dr Ludwig Rehn réalisa la première opération cardiaque documentée avec succès, sur un jeune homme de 22 ans victime d'une blessure par arme blanche au cœur.
-
-\subsection{Développements au XX\textsuperscript{ème} siècle}
-
-William Osler (1849-1919), médecin en chef à l'hôpital Johns Hopkins, contribua significativement à la compréhension de l'angine de poitrine. En 1915, la création de l'Association pour la prévention et l'atténuation des maladies cardiaques à New York marqua le début d'une approche organisée de la santé cardiovasculaire.
-
-\section{Manifestations Cliniques}
-
-\subsection{Symptômes courants}
-
-Les manifestations cliniques varient selon le type de pathologie :
-
-\begin{table}[h]
-\centering
-\caption{Principaux symptômes des maladies cardiaques}
-\begin{tabular}{@{}ll@{}}
-\toprule
-\textbf{Symptôme} & \textbf{Description} \\
-\midrule
-Douleur thoracique & Sensation d'oppression, d'étau ou de brûlure \\
-Dyspnée & Essoufflement au repos ou à l'effort \\
-Fatigue & Épuisement disproportionné aux activités \\
-Palpitations & Perception anormale des battements cardiaques \\
-Œdème & Gonflement des membres inférieurs \\
-Syncope & Perte de connaissance transitoire \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\subsection{Signes d'urgence}
-
-Certains symptômes nécessitent une intervention médicale immédiate, notamment en cas d'infarctus du myocarde : douleur thoracique intense et prolongée, irradiation vers le bras gauche, la mâchoire ou le dos, sueurs profuses, nausées, sensation de mort imminente.
-
-\section{Diagnostic}
-
-\subsection{Démarche diagnostique}
-
-Le diagnostic des maladies cardiaques repose sur une approche multidimensionnelle :
-
-\begin{enumerate}
-    \item \textbf{Anamnèse :} Recueil détaillé des antécédents et symptômes
-    \item \textbf{Examen clinique :} Auscultation cardiaque, mesure de la pression artérielle
-    \item \textbf{Électrocardiogramme (ECG) :} Enregistrement de l'activité électrique cardiaque
-    \item \textbf{Analyses biologiques :} Dosage des biomarqueurs cardiaques, profil lipidique
-    \item \textbf{Échocardiographie :} Évaluation échographique de la structure et fonction cardiaque
-    \item \textbf{Épreuves d'effort :} Tests de stress cardiovasculaire
-    \item \textbf{Imagerie avancée :} Scanner coronaire, IRM cardiaque
-    \item \textbf{Coronarographie :} Visualisation directe des artères coronaires (examen invasif)
-\end{enumerate}
-
-\section{Stratégies Thérapeutiques}
-
-\subsection{Modifications du mode de vie}
-
-Les interventions non pharmacologiques constituent le fondement du traitement :
-
-\begin{itemize}
-    \item Adoption d'un régime alimentaire équilibré (type méditerranéen)
-    \item Pratique régulière d'activité physique (150 minutes par semaine minimum)
-    \item Cessation tabagique complète
-    \item Gestion du stress par techniques de relaxation
-    \item Maintien d'un poids corporel optimal
-    \item Limitation de la consommation d'alcool
-\end{itemize}
-
-\subsection{Traitements médicamenteux}
-
-La pharmacothérapie cardiovasculaire comprend plusieurs classes thérapeutiques :
-
-\begin{itemize}
-    \item \textbf{Antihypertenseurs :} Inhibiteurs de l'enzyme de conversion, antagonistes calciques
-    \item \textbf{Hypolipémiants :} Statines pour réduction du cholestérol
-    \item \textbf{Antithrombotiques :} Anticoagulants et antiagrégants plaquettaires
-    \item \textbf{Bêtabloquants :} Réduction de la charge de travail cardiaque
-    \item \textbf{Diurétiques :} Gestion de la surcharge volémique
-\end{itemize}
-
-\subsection{Interventions invasives}
-
-Pour les cas sévères ou réfractaires au traitement médical :
-
-\begin{itemize}
-    \item Angioplastie coronaire avec pose de stent
-    \item Pontage aorto-coronarien
-    \item Chirurgie valvulaire (réparation ou remplacement)
-    \item Implantation de stimulateur cardiaque ou défibrillateur
-    \item Transplantation cardiaque dans les situations extrêmes
-\end{itemize}
-
-\section{Prévention}
-
-\subsection{Prévention primaire}
-
-La prévention demeure l'approche la plus efficace pour réduire l'incidence des maladies cardiovasculaires :
-
-\begin{tcolorbox}[colback=green!5!white,colframe=green!60!black,title=\textbf{Mesures préventives essentielles}]
-\begin{itemize}
-    \item Maintien d'un indice de masse corporelle optimal
-    \item Alimentation riche en fruits, légumes, grains entiers
-    \item Réduction des graisses saturées et trans
-    \item Activité physique régulière et adaptée
-    \item Surveillance régulière de la tension artérielle et du cholestérol
-    \item Abstention tabagique
-    \item Modération dans la consommation d'alcool
-    \item Gestion efficace du stress
-\end{itemize}
-\end{tcolorbox}
-
-\subsection{Prévention secondaire}
-
-Chez les patients ayant déjà présenté un événement cardiovasculaire, la prévention secondaire vise à éviter les récidives par une adhésion stricte au traitement médicamenteux, un suivi médical régulier, une réadaptation cardiaque, et le contrôle rigoureux des facteurs de risque.
-
-\section{Enjeux de Santé Publique}
-
-\subsection{Charge de morbidité mondiale}
-
-Les maladies cardiovasculaires représentent la première cause de mortalité à l'échelle planétaire, responsables de millions de décès annuels. Leur prévalence continue d'augmenter, particulièrement dans les pays en développement connaissant une transition épidémiologique.
-
-\subsection{Coûts sociétaux}
-
-L'impact économique des maladies cardiaques est considérable, englobant les coûts directs (soins médicaux, hospitalisations, médicaments) et indirects (perte de productivité, invalidité, mortalité prématurée). Cette charge pèse lourdement sur les systèmes de santé nationaux.
-
-\subsection{Inégalités d'accès aux soins}
-
-Des disparités importantes persistent dans l'accès aux services de cardiologie :
-
-\begin{itemize}
-    \item Populations rurales : éloignement des centres spécialisés
-    \item Minorités ethniques : barrières linguistiques et culturelles
-    \item Personnes âgées : difficultés de navigation dans les systèmes de santé complexes
-    \item Populations marginalisées : accès limité à la prévention et aux soins
-\end{itemize}
-
-\section{Perspectives et Innovations}
-
-\subsection{Avancées technologiques}
-
-La cardiologie bénéficie de progrès technologiques constants : télémédecine et surveillance à distance, dispositifs implantables connectés, intelligence artificielle pour le diagnostic, médecine de précision basée sur le profil génétique, thérapies cellulaires et régénératives.
-
-\subsection{Recherche future}
-
-Les axes de recherche prometteurs incluent l'identification de nouveaux biomarqueurs, le développement de thérapies géniques, l'amélioration des techniques d'imagerie non invasive, et la compréhension approfondie des mécanismes moléculaires sous-jacents.
-
-\section{Conclusion}
-
-Les maladies cardiaques constituent un défi majeur de santé publique mondiale, affectant des millions d'individus et leurs familles. Malgré des progrès considérables dans la compréhension, le diagnostic et le traitement de ces pathologies depuis les premières observations antiques jusqu'aux avancées technologiques contemporaines, elles demeurent la principale cause de mortalité dans le monde.
-
-L'analyse des populations affectées révèle des inégalités importantes, liées à l'âge, au sexe, à l'origine ethnique et au statut socio-économique. Ces disparités soulignent la nécessité d'approches de santé publique ciblées et équitables. L'impact multidimensionnel de ces maladies, s'étendant des sphères physique et psychologique aux domaines économique et social, nécessite une prise en charge holistique et multidisciplinaire.
-
-La prévention reste l'outil le plus puissant pour combattre l'épidémie cardiovasculaire. Les modifications du mode de vie, bien que simples en théorie, requièrent un engagement sociétal pour créer des environnements favorables à la santé cardiovasculaire. L'éducation du public, l'amélioration de l'accès aux soins, et la réduction des inégalités constituent des priorités essentielles.
-
-Les perspectives futures sont encourageantes, avec l'émergence de technologies innovantes et de nouvelles approches thérapeutiques. Cependant, la victoire contre les maladies cardiaques nécessitera une mobilisation collective impliquant les professionnels de santé, les décideurs politiques, les chercheurs, et chaque individu dans l'adoption de comportements préventifs.
-
-En définitive, la lutte contre les maladies cardiovasculaires représente non seulement un défi médical, mais également un impératif de justice sociale et de développement durable, requérant une action coordonnée à tous les niveaux de la société.
-
-\section*{Références}
-
-\begin{enumerate}
-    \item Organisation Mondiale de la Santé (OMS). Maladies cardiovasculaires. 2024.
-    \item Société Européenne de Cardiologie. Guidelines on cardiovascular disease prevention. 2023.
-    \item Harvey, W. Exercitatio Anatomica de Motu Cordis et Sanguinis in Animalibus. 1628.
-    \item American Heart Association. Heart Disease and Stroke Statistics. 2024.
-    \item Institut National de la Santé et de la Recherche Médicale (INSERM). Dossier Maladies cardiovasculaires. 2024.
-\end{enumerate}
-
-\end{document}
+pip install ucimlrepo                                                                                                              
+Collecting ucimlrepo
+  Downloading ucimlrepo-0.0.7-py3-none-any.whl.metadata (5.5 kB)
+Requirement already satisfied: pandas>=1.0.0 in /usr/local/lib/python3.12/dist-packages (from ucimlrepo) (2.2.2)
+Requirement already satisfied: certifi>=2020.12.5 in /usr/local/lib/python3.12/dist-packages (from ucimlrepo) (2025.10.5)
+Requirement already satisfied: numpy>=1.26.0 in /usr/local/lib/python3.12/dist-packages (from pandas>=1.0.0->ucimlrepo) (2.0.2)
+Requirement already satisfied: python-dateutil>=2.8.2 in /usr/local/lib/python3.12/dist-packages (from pandas>=1.0.0->ucimlrepo) (2.9.0.post0)
+Requirement already satisfied: pytz>=2020.1 in /usr/local/lib/python3.12/dist-packages (from pandas>=1.0.0->ucimlrepo) (2025.2)
+Requirement already satisfied: tzdata>=2022.7 in /usr/local/lib/python3.12/dist-packages (from pandas>=1.0.0->ucimlrepo) (2025.2)
+Requirement already satisfied: six>=1.5 in /usr/local/lib/python3.12/dist-packages (from python-dateutil>=2.8.2->pandas>=1.0.0->ucimlrepo) (1.17.0)
+Downloading ucimlrepo-0.0.7-py3-none-any.whl (8.0 kB)
+Installing collected packages: ucimlrepo
+Successfully installed ucimlrepo-0.0.7
+
+from ucimlrepo import fetch_ucirepo 
+  
+# fetch dataset 
+heart_disease = fetch_ucirepo(id=45) 
+  
+# data (as pandas dataframes) 
+X = heart_disease.data.features 
+y = heart_disease.data.targets 
+  
+# metadata 
+print(heart_disease.metadata) 
+  
+# variable information 
+print(heart_disease.variables) 
+{'uci_id': 45, 'name': 'Heart Disease', 'repository_url': 'https://archive.ics.uci.edu/dataset/45/heart+disease', 'data_url': 'https://archive.ics.uci.edu/static/public/45/data.csv', 'abstract': '4 databases: Cleveland, Hungary, Switzerland, and the VA Long Beach', 'area': 'Health and Medicine', 'tasks': ['Classification'], 'characteristics': ['Multivariate'], 'num_instances': 303, 'num_features': 13, 'feature_types': ['Categorical', 'Integer', 'Real'], 'demographics': ['Age', 'Sex'], 'target_col': ['num'], 'index_col': None, 'has_missing_values': 'yes', 'missing_values_symbol': 'NaN', 'year_of_dataset_creation': 1989, 'last_updated': 'Fri Nov 03 2023', 'dataset_doi': '10.24432/C52P4X', 'creators': ['Andras Janosi', 'William Steinbrunn', 'Matthias Pfisterer', 'Robert Detrano'], 'intro_paper': {'ID': 231, 'type': 'NATIVE', 'title': 'International application of a new probability algorithm for the diagnosis of coronary artery disease.', 'authors': 'R. Detrano, A. Jánosi, W. Steinbrunn, M. Pfisterer, J. Schmid, S. Sandhu, K. Guppy, S. Lee, V. Froelicher', 'venue': 'American Journal of Cardiology', 'year': 1989, 'journal': None, 'DOI': None, 'URL': 'https://www.semanticscholar.org/paper/a7d714f8f87bfc41351eb5ae1e5472f0ebbe0574', 'sha': None, 'corpus': None, 'arxiv': None, 'mag': None, 'acl': None, 'pmid': '2756873', 'pmcid': None}, 'additional_info': {'summary': 'This database contains 76 attributes, but all published experiments refer to using a subset of 14 of them.  In particular, the Cleveland database is the only one that has been used by ML researchers to date.  The "goal" field refers to the presence of heart disease in the patient.  It is integer valued from 0 (no presence) to 4. Experiments with the Cleveland database have concentrated on simply attempting to distinguish presence (values 1,2,3,4) from absence (value 0).  \n   \nThe names and social security numbers of the patients were recently removed from the database, replaced with dummy values.\n\nOne file has been "processed", that one containing the Cleveland database.  All four unprocessed files also exist in this directory.\n\nTo see Test Costs (donated by Peter Turney), please see the folder "Costs" ', 'purpose': None, 'funded_by': None, 'instances_represent': None, 'recommended_data_splits': None, 'sensitive_data': None, 'preprocessing_description': None, 'variable_info': 'Only 14 attributes used:\r\n      1. #3  (age)       \r\n      2. #4  (sex)       \r\n      3. #9  (cp)        \r\n      4. #10 (trestbps)  \r\n      5. #12 (chol)      \r\n      6. #16 (fbs)       \r\n      7. #19 (restecg)   \r\n      8. #32 (thalach)   \r\n      9. #38 (exang)     \r\n      10. #40 (oldpeak)   \r\n      11. #41 (slope)     \r\n      12. #44 (ca)        \r\n      13. #51 (thal)      \r\n      14. #58 (num)       (the predicted attribute)\r\n\r\nComplete attribute documentation:\r\n      1 id: patient identification number\r\n      2 ccf: social security number (I replaced this with a dummy value of 0)\r\n      3 age: age in years\r\n      4 sex: sex (1 = male; 0 = female)\r\n      5 painloc: chest pain location (1 = substernal; 0 = otherwise)\r\n      6 painexer (1 = provoked by exertion; 0 = otherwise)\r\n      7 relrest (1 = relieved after rest; 0 = otherwise)\r\n      8 pncaden (sum of 5, 6, and 7)\r\n      9 cp: chest pain type\r\n        -- Value 1: typical angina\r\n        -- Value 2: atypical angina\r\n        -- Value 3: non-anginal pain\r\n        -- Value 4: asymptomatic\r\n     10 trestbps: resting blood pressure (in mm Hg on admission to the hospital)\r\n     11 htn\r\n     12 chol: serum cholestoral in mg/dl\r\n     13 smoke: I believe this is 1 = yes; 0 = no (is or is not a smoker)\r\n     14 cigs (cigarettes per day)\r\n     15 years (number of years as a smoker)\r\n     16 fbs: (fasting blood sugar > 120 mg/dl)  (1 = true; 0 = false)\r\n     17 dm (1 = history of diabetes; 0 = no such history)\r\n     18 famhist: family history of coronary artery disease (1 = yes; 0 = no)\r\n     19 restecg: resting electrocardiographic results\r\n        -- Value 0: normal\r\n        -- Value 1: having ST-T wave abnormality (T wave inversions and/or ST elevation or depression of > 0.05 mV)\r\n        -- Value 2: showing probable or definite left ventricular hypertrophy by Estes\' criteria\r\n     20 ekgmo (month of exercise ECG reading)\r\n     21 ekgday(day of exercise ECG reading)\r\n     22 ekgyr (year of exercise ECG reading)\r\n     23 dig (digitalis used furing exercise ECG: 1 = yes; 0 = no)\r\n     24 prop (Beta blocker used during exercise ECG: 1 = yes; 0 = no)\r\n     25 nitr (nitrates used during exercise ECG: 1 = yes; 0 = no)\r\n     26 pro (calcium channel blocker used during exercise ECG: 1 = yes; 0 = no)\r\n     27 diuretic (diuretic used used during exercise ECG: 1 = yes; 0 = no)\r\n     28 proto: exercise protocol\r\n          1 = Bruce     \r\n          2 = Kottus\r\n          3 = McHenry\r\n          4 = fast Balke\r\n          5 = Balke\r\n          6 = Noughton \r\n          7 = bike 150 kpa min/min  (Not sure if "kpa min/min" is what was written!)\r\n          8 = bike 125 kpa min/min  \r\n          9 = bike 100 kpa min/min\r\n         10 = bike 75 kpa min/min\r\n         11 = bike 50 kpa min/min\r\n         12 = arm ergometer\r\n     29 thaldur: duration of exercise test in minutes\r\n     30 thaltime: time when ST measure depression was noted\r\n     31 met: mets achieved\r\n     32 thalach: maximum heart rate achieved\r\n     33 thalrest: resting heart rate\r\n     34 tpeakbps: peak exercise blood pressure (first of 2 parts)\r\n     35 tpeakbpd: peak exercise blood pressure (second of 2 parts)\r\n     36 dummy\r\n     37 trestbpd: resting blood pressure\r\n     38 exang: exercise induced angina (1 = yes; 0 = no)\r\n     39 xhypo: (1 = yes; 0 = no)\r\n     40 oldpeak = ST depression induced by exercise relative to rest\r\n     41 slope: the slope of the peak exercise ST segment\r\n        -- Value 1: upsloping\r\n        -- Value 2: flat\r\n        -- Value 3: downsloping\r\n     42 rldv5: height at rest\r\n     43 rldv5e: height at peak exercise\r\n     44 ca: number of major vessels (0-3) colored by flourosopy\r\n     45 restckm: irrelevant\r\n     46 exerckm: irrelevant\r\n     47 restef: rest raidonuclid (sp?) ejection fraction\r\n     48 restwm: rest wall (sp?) motion abnormality\r\n        0 = none\r\n        1 = mild or moderate\r\n        2 = moderate or severe\r\n        3 = akinesis or dyskmem (sp?)\r\n     49 exeref: exercise radinalid (sp?) ejection fraction\r\n     50 exerwm: exercise wall (sp?) motion \r\n     51 thal: 3 = normal; 6 = fixed defect; 7 = reversable defect\r\n     52 thalsev: not used\r\n     53 thalpul: not used\r\n     54 earlobe: not used\r\n     55 cmo: month of cardiac cath (sp?)  (perhaps "call")\r\n     56 cday: day of cardiac cath (sp?)\r\n     57 cyr: year of cardiac cath (sp?)\r\n     58 num: diagnosis of heart disease (angiographic disease status)\r\n        -- Value 0: < 50% diameter narrowing\r\n        -- Value 1: > 50% diameter narrowing\r\n        (in any major vessel: attributes 59 through 68 are vessels)\r\n     59 lmt\r\n     60 ladprox\r\n     61 laddist\r\n     62 diag\r\n     63 cxmain\r\n     64 ramus\r\n     65 om1\r\n     66 om2\r\n     67 rcaprox\r\n     68 rcadist\r\n     69 lvx1: not used\r\n     70 lvx2: not used\r\n     71 lvx3: not used\r\n     72 lvx4: not used\r\n     73 lvf: not used\r\n     74 cathef: not used\r\n     75 junk: not used\r\n     76 name: last name of patient  (I replaced this with the dummy string "name")', 'citation': None}}
+        name     role         type demographic  \
+0        age  Feature      Integer         Age   
+1        sex  Feature  Categorical         Sex   
+2         cp  Feature  Categorical        None   
+3   trestbps  Feature      Integer        None   
+4       chol  Feature      Integer        None   
+5        fbs  Feature  Categorical        None   
+6    restecg  Feature  Categorical        None   
+7    thalach  Feature      Integer        None   
+8      exang  Feature  Categorical        None   
+9    oldpeak  Feature      Integer        None   
+10     slope  Feature  Categorical        None   
+11        ca  Feature      Integer        None   
+12      thal  Feature  Categorical        None   
+13       num   Target      Integer        None   
+
+                                          description  units missing_values  
+0                                                None  years             no  
+1                                                None   None             no  
+2                                                None   None             no  
+3   resting blood pressure (on admission to the ho...  mm Hg             no  
+4                                   serum cholestoral  mg/dl             no  
+5                     fasting blood sugar > 120 mg/dl   None             no  
+6                                                None   None             no  
+7                         maximum heart rate achieved   None             no  
+8                             exercise induced angina   None             no  
+9   ST depression induced by exercise relative to ...   None             no  
+10                                               None   None             no  
+11  number of major vessels (0-3) colored by flour...   None            yes  
+12                                               None   None            yes  
+13                         diagnosis of heart disease   None             no  
