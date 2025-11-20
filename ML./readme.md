@@ -6,7 +6,7 @@
 **Date** : 20 novembre 2025  
 **Objet** : Chargement et exploration du dataset Wine Quality  
 **Référence** : UCI Dataset ID 186  
-**Réalisé par** : [Votre nom]
+**Réalisé par** : ELORF WISAL
 
 ---
 
