@@ -1,2 +1,290 @@
-Credit Card Fraud Detection
+# Compte Rendu : Détection de Fraude par Carte Bancaire
 
+## 1. Introduction
+
+### 1.1 Contexte
+La fraude par carte bancaire représente un défi majeur pour les institutions financières à l'échelle mondiale. Avec l'augmentation des transactions électroniques, les techniques de fraude deviennent de plus en plus sophistiquées, nécessitant des systèmes de détection automatisés et intelligents.
+
+### 1.2 Objectif du Projet
+Développer un modèle de Machine Learning capable de détecter automatiquement les transactions frauduleuses parmi un grand volume de transactions légitimes, tout en minimisant les faux positifs qui pourraient perturber l'expérience client.
+
+### 1.3 Source des Données
+- **Dataset** : Credit Card Fraud Detection (Kaggle)
+- **URL** : https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud
+- **Origine** : Transactions européennes (septembre 2013)
+- **Taille** : 284 807 transactions
+
+---
+
+## 2. Description des Données
+
+### 2.1 Structure du Dataset
+Le dataset contient 31 variables :
+
+| Variable | Type | Description |
+|----------|------|-------------|
+| **Time** | Numérique | Secondes écoulées depuis la première transaction |
+| **V1-V28** | Numérique | Composantes principales issues d'une PCA (anonymisées) |
+| **Amount** | Numérique | Montant de la transaction |
+| **Class** | Binaire | 0 = Légitime, 1 = Frauduleuse |
+
+### 2.2 Caractéristiques Importantes
+
+**Déséquilibre des Classes**
+- Transactions légitimes : 284 315 (99,828%)
+- Transactions frauduleuses : 492 (0,172%)
+- Ratio : environ 1 fraude pour 578 transactions légitimes
+
+**Anonymisation**
+Les variables V1 à V28 sont le résultat d'une transformation PCA appliquée pour protéger la confidentialité des données. Seules les variables Time et Amount n'ont pas été transformées.
+
+**Distribution des Montants**
+- Les fraudes concernent généralement des montants plus faibles
+- Nécessite une analyse approfondie de la distribution
+
+---
+
+## 3. Problématique et Défis
+
+### 3.1 Défi Principal : Déséquilibre des Classes
+Le déséquilibre extrême (0,172% de fraudes) pose plusieurs problèmes :
+- Les modèles ont tendance à prédire systématiquement la classe majoritaire
+- L'accuracy n'est pas une métrique appropriée (99,8% en prédisant toujours "légitime")
+- Risque élevé de faux négatifs (fraudes non détectées)
+
+### 3.2 Compromis à Optimiser
+- **Faux Positifs** : Bloquer une transaction légitime (mauvaise expérience client)
+- **Faux Négatifs** : Ne pas détecter une fraude (perte financière)
+
+### 3.3 Questions de Recherche
+1. Quelles caractéristiques (features) sont les plus discriminantes pour identifier une fraude ?
+2. Quel algorithme offre le meilleur compromis précision/rappel ?
+3. Comment gérer efficacement le déséquilibre des classes ?
+
+---
+
+## 4. Méthodologie Proposée
+
+### 4.1 Analyse Exploratoire des Données (EDA)
+
+**Étape 1 : Statistiques Descriptives**
+- Distribution des variables V1-V28
+- Analyse de la variable Time (tendances temporelles)
+- Distribution des montants (Amount) par classe
+- Corrélations entre variables
+
+**Étape 2 : Visualisations**
+- Histogrammes et boxplots par classe
+- Matrice de corrélation
+- Distribution temporelle des fraudes
+- Analyse des montants frauduleux vs légitimes
+
+### 4.2 Prétraitement des Données
+
+**Normalisation**
+- Standardisation de la variable Amount
+- Normalisation de la variable Time si nécessaire
+
+**Division du Dataset**
+- Training set : 70%
+- Validation set : 15%
+- Test set : 15%
+- Stratification obligatoire pour maintenir le ratio de classes
+
+### 4.3 Gestion du Déséquilibre
+
+**Techniques à Appliquer**
+1. **Sous-échantillonnage (Undersampling)** : Réduire la classe majoritaire
+2. **Sur-échantillonnage (Oversampling)** : Augmenter la classe minoritaire
+3. **SMOTE** (Synthetic Minority Over-sampling Technique) : Générer des exemples synthétiques
+4. **Ajustement des poids de classe** : Pénaliser davantage les erreurs sur la classe minoritaire
+
+### 4.4 Modèles de Machine Learning
+
+**Modèles à Tester**
+
+1. **Régression Logistique**
+   - Baseline simple et interprétable
+   - Avec ajustement de poids de classe
+
+2. **Random Forest**
+   - Robuste aux données déséquilibrées
+   - Permet l'analyse d'importance des features
+
+3. **XGBoost / LightGBM**
+   - Performance élevée sur données tabulaires
+   - Paramètre scale_pos_weight pour gérer le déséquilibre
+
+4. **Réseaux de Neurones**
+   - Architecture : Dense layers avec Dropout
+   - Fonction de coût pondérée
+
+5. **Isolation Forest / Autoencoders**
+   - Approche de détection d'anomalies
+   - Ne nécessite pas d'équilibrage
+
+### 4.5 Métriques d'Évaluation
+
+**Métriques Principales**
+- **Precision** : Parmi les transactions détectées comme fraudes, combien le sont réellement ?
+- **Recall (Sensibilité)** : Parmi toutes les fraudes, combien sont détectées ?
+- **F1-Score** : Moyenne harmonique de Precision et Recall
+- **ROC-AUC** : Aire sous la courbe ROC (capacité de discrimination)
+- **PR-AUC** : Aire sous la courbe Precision-Recall (plus adaptée aux données déséquilibrées)
+
+**Matrice de Confusion**
+```
+                    Prédit Légitime    Prédit Fraude
+Réel Légitime       True Negative      False Positive
+Réel Fraude         False Negative     True Positive
+```
+
+---
+
+## 5. Plan de Réalisation
+
+### Phase 1 : Exploration (Semaine 1)
+- Chargement et inspection du dataset
+- Analyse statistique descriptive
+- Visualisations exploratoires
+- Identification des patterns
+
+### Phase 2 : Prétraitement (Semaine 1-2)
+- Nettoyage des données (vérification valeurs manquantes)
+- Normalisation des variables
+- Division train/validation/test
+- Création de versions équilibrées du dataset
+
+### Phase 3 : Modélisation (Semaine 2-3)
+- Entraînement des modèles baseline
+- Optimisation des hyperparamètres (Grid Search / Random Search)
+- Application des techniques de gestion du déséquilibre
+- Validation croisée stratifiée
+
+### Phase 4 : Évaluation (Semaine 3-4)
+- Comparaison des performances
+- Analyse des erreurs (faux positifs/négatifs)
+- Sélection du meilleur modèle
+- Tests sur le test set
+
+### Phase 5 : Analyse et Recommandations (Semaine 4)
+- Interprétation des résultats
+- Feature importance
+- Recommandations pour le déploiement
+- Documentation finale
+
+---
+
+## 6. Résultats Attendus
+
+### 6.1 Objectifs de Performance
+- **Recall minimum** : 85% (détecter au moins 85% des fraudes)
+- **Precision cible** : 90% (minimiser les faux positifs)
+- **F1-Score** : > 0,87
+- **ROC-AUC** : > 0,95
+
+### 6.2 Livrables
+1. **Notebook Jupyter** : Code complet documenté
+2. **Rapport d'analyse** : Insights et visualisations
+3. **Modèle optimisé** : Fichier .pkl ou .h5
+4. **Dashboard de monitoring** : Visualisation des prédictions
+5. **Documentation technique** : Guide de déploiement
+
+---
+
+## 7. Outils et Technologies
+
+### 7.1 Environnement de Développement
+- **Python 3.8+**
+- **Jupyter Notebook / Google Colab**
+- **Git** pour le versioning
+
+### 7.2 Bibliothèques Python
+
+**Manipulation de Données**
+- pandas
+- numpy
+
+**Visualisation**
+- matplotlib
+- seaborn
+- plotly
+
+**Machine Learning**
+- scikit-learn
+- imbalanced-learn (pour SMOTE)
+- xgboost / lightgbm
+- tensorflow / keras (si réseaux de neurones)
+
+**Évaluation**
+- sklearn.metrics
+- yellowbrick (visualisations ML)
+
+---
+
+## 8. Risques et Limitations
+
+### 8.1 Risques Identifiés
+- **Surapprentissage** : Particulièrement avec des modèles complexes sur peu de fraudes
+- **Faux positifs élevés** : Impact négatif sur l'expérience client
+- **Données anciennes** : Dataset de 2013, les patterns de fraude évoluent
+- **Anonymisation** : Difficile d'interpréter les variables V1-V28
+
+### 8.2 Limitations
+- Pas d'informations contextuelles (localisation, type de marchand, etc.)
+- Snapshot temporel limité (septembre 2013)
+- Biais potentiel dans la collecte des données
+
+### 8.3 Mitigation
+- Utiliser la validation croisée stricte
+- Tester sur plusieurs seuils de décision
+- Analyser les erreurs qualitativement
+- Privilégier les modèles interprétables si possible
+
+---
+
+## 9. Perspectives et Améliorations Futures
+
+### 9.1 Améliorations du Modèle
+- **Ensemble Learning** : Combiner plusieurs modèles (stacking, blending)
+- **Deep Learning** : Autoencoders, LSTM pour analyse temporelle
+- **Feature Engineering** : Créer de nouvelles variables à partir de Time et Amount
+- **Apprentissage en temps réel** : Mise à jour continue du modèle
+
+### 9.2 Aspects Opérationnels
+- Système d'alerte en temps réel
+- Interface de vérification manuelle pour cas ambigus
+- A/B testing pour mesurer l'impact business
+- Monitoring de la dérive des données (concept drift)
+
+### 9.3 Considérations Éthiques
+- Éviter les biais discriminatoires
+- Transparence des décisions (explicabilité)
+- Protection des données personnelles
+- Droit de contestation pour les clients
+
+---
+
+## 10. Conclusion
+
+Ce projet de détection de fraude par carte bancaire représente un cas d'usage typique des défis rencontrés en Machine Learning appliqué. Le déséquilibre extrême des classes nécessite une approche méthodologique rigoureuse et l'utilisation de techniques avancées.
+
+Le succès du projet se mesurera non seulement par les métriques techniques (Precision, Recall, F1), mais aussi par l'impact opérationnel : réduction des pertes financières tout en maintenant une expérience client positive.
+
+Les compétences développées (gestion de données déséquilibrées, optimisation multi-critères, évaluation robuste) sont transférables à de nombreux autres domaines : détection d'anomalies médicales, maintenance prédictive, cybersécurité, etc.
+
+---
+
+## 11. Références
+
+- Dataset Kaggle : https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud
+- Documentation scikit-learn : https://scikit-learn.org
+- Imbalanced-learn : https://imbalanced-learn.org
+- "Learning from Imbalanced Data" (He & Garcia, 2009)
+- SMOTE: Synthetic Minority Over-sampling Technique (Chawla et al., 2002)
+
+---
+
+**Date de rédaction** : Novembre 2024  
+**Auteur** : Projet Data Science - Détection de Fraude  
+**Version** : 1.0
