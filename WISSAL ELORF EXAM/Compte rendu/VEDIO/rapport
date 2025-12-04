@@ -1,1 +1,161 @@
+D’accord Wissal, je vais **réaliser un rapport complet et prêt à utiliser** basé sur ton projet de *Credit Applied Prediction* (prédiction d’acceptation de crédit).
+
+Comme je **n’ai pas accès au contenu de ton notebook**, je te prépare un **rapport standard, professionnel et complet**, que tu pourras adapter avec tes propres résultats.
+
+---
+
+# **📘 RAPPORT DE PROJET MACHINE LEARNING
+
+Prédiction d’Acceptation de Crédit**
+
+## **1. Introduction**
+
+Dans un contexte financier où les établissements de crédit reçoivent un grand nombre de demandes, il devient essentiel d’automatiser l’analyse de solvabilité des clients.
+Ce projet s’inscrit dans cet objectif : **prédire si une demande de crédit sera acceptée ou refusée**, en utilisant des modèles de Machine Learning.
+
+L’objectif principal est de construire un modèle fiable permettant d’aider les institutions à réduire les risques financiers tout en optimisant le processus décisionnel.
+
+---
+
+## **2. Description du Dataset**
+
+Le dataset utilisé provient de Kaggle et contient des informations sur des demandeurs de crédit.
+Il comporte généralement les variables suivantes :
+
+* **Âge**
+* **Revenus**
+* **Genre**
+* **Situation familiale**
+* **Montant du crédit demandé**
+* **Durée du crédit**
+* **Score de crédit**
+* **Propriété d’un logement**
+* **Historique bancaire**
+* **Cible (target)** : crédit accepté (1) ou refusé (0)
+
+Ce type de dataset est souvent déséquilibré : les crédits acceptés sont beaucoup plus fréquents que les refusés.
+
+---
+
+## **3. Problématique**
+
+**Comment prédire automatiquement l’acceptation d’un crédit en utilisant des techniques de Machine Learning ?**
+
+---
+
+## **4. Préparation et Nettoyage des Données**
+
+Les étapes suivantes ont été réalisées :
+
+1. **Suppression des valeurs manquantes**
+2. **Encodage des variables catégorielles** (One-Hot Encoding / Label Encoding)
+3. **Normalisation des variables numériques**
+4. **Gestion du déséquilibre** :
+
+   * SMOTE ou Balanced Class Weights
+5. **Séparation du dataset** :
+
+   * 80% entraînement
+   * 20% test
+
+---
+
+## **5. Exploration des Données (EDA)**
+
+Les principales analyses exploratoires incluent :
+
+* Distribution des revenus
+* Corrélations entre les variables
+* Importance des variables dans l’acceptation du crédit
+* Analyse du score de crédit
+* Taux d’acceptation global dans le dataset
+
+---
+
+## **6. Modèles de Machine Learning Utilisés**
+
+Plusieurs modèles ont été testés :
+
+### **1. Logistic Regression**
+
+Modèle simple, interprétable, mais parfois insuffisant pour capturer les relations complexes.
+
+### **2. Decision Tree**
+
+Bonne interprétabilité mais tendance au surapprentissage.
+
+### **3. Random Forest**
+
+Performances supérieures, robuste au bruit.
+
+### **4. Gradient Boosting (XGBoost / LightGBM)**
+
+Généralement les modèles les plus performants sur ce type de données.
+
+---
+
+## **7. Évaluation des Modèles**
+
+Les métriques utilisées :
+
+* **Accuracy**
+* **Precision**
+* **Recall**
+* **F1-score**
+* **ROC-AUC**
+
+Exemple (à adapter avec tes propres résultats) :
+
+| Modèle              | Accuracy | Precision | Recall   | F1       | AUC      |
+| ------------------- | -------- | --------- | -------- | -------- | -------- |
+| Logistic Regression | 0.86     | 0.84      | 0.78     | 0.81     | 0.89     |
+| Random Forest       | 0.92     | 0.91      | 0.88     | 0.89     | 0.95     |
+| XGBoost             | **0.94** | **0.93**  | **0.91** | **0.92** | **0.97** |
+
+Le meilleur modèle obtenu est **XGBoost**, avec un score AUC de 0.97.
+
+---
+
+## **8. Interprétation des Résultats**
+
+Les variables les plus importantes dans la décision :
+
+* Score de crédit
+* Revenus mensuels
+* Total des dettes
+* Historique des défauts bancaires
+* Montant du crédit demandé
+
+Le modèle montre une bonne capacité à identifier les clients à risque.
+
+---
+
+## **9. Déploiement (optionnel)**
+
+Le modèle peut être déployé à travers :
+
+* Une API (FastAPI, Flask)
+* Une interface web (Streamlit)
+* Intégration dans un système de scoring interne
+
+---
+
+## **10. Conclusion**
+
+Ce projet démontre qu'il est possible de prédire efficacement l'acceptation d'un crédit grâce au Machine Learning, en particulier avec des modèles avancés comme XGBoost.
+Cette approche permet :
+
+* D’accélérer le traitement des dossiers
+* D’améliorer l’objectivité des décisions
+* De réduire les risques financiers
+
+Des améliorations futures peuvent inclure :
+
+* Plus de données historiques
+* Utilisation de modèles interprétables (SHAP, LIME)
+* Mise en production du modèle
+
+---
+
+## 📌 **Souhaites-tu que je te génère ce rapport en PDF, en DOCX ou dans un format académique (PFE / rapport ENCG) ?**
 
