@@ -226,5 +226,7 @@ Des tableaux
 
 
 
+Representation Graphique 
+<img width="597" height="436" alt="image" src="https://github.com/user-attachments/assets/e05b99f4-d41a-4471-83a8-9d8e9b2e6b05" />
 
 
