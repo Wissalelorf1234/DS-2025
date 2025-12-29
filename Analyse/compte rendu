@@ -1,665 +1,214 @@
+
+
 # COMPTE RENDU : DÉTECTION DE FRAUDE PAR CARTE BANCAIRE
 
+---
+
+## Informations générales
+
+* **Dataset** : Credit Card Fraud Detection
+* **Source** : Kaggle – [https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud)
+* **Auteur** : Analyse complète
+* **Date** : Novembre 2025
+
+---
+
 ## TABLE DES MATIÈRES
+
 1. Introduction
 2. Description du Dataset
 3. Contexte et Enjeux de la Fraude
 4. Analyse Exploratoire des Données
 5. Visualisations Graphiques
-6. Analyse de Déséquilibre des Classes
+6. Analyse du Déséquilibre des Classes
 7. Modèles de Classification
-8. Conclusion
+8. Conclusion et Recommandations
 
 ---
 
 ## 1. INTRODUCTION
 
-Le **Credit Card Fraud Detection Dataset** est un jeu de données crucial pour la sécurité financière, permettant de développer des systèmes de détection automatique des transactions frauduleuses par carte bancaire.
+Le **Credit Card Fraud Detection Dataset** est un jeu de données de référence utilisé pour développer et tester des modèles de détection automatique de fraudes par carte bancaire.
 
-**Problématique** : Comment identifier avec précision les transactions frauduleuses parmi des millions de transactions légitimes, tout en minimisant les faux positifs qui perturbent l'expérience client ?
-
-**URL** : https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud
+**Problématique :**
+Comment identifier efficacement les transactions frauduleuses parmi un très grand nombre de transactions légitimes, tout en limitant les faux positifs qui nuisent à l’expérience client ?
 
 ---
 
 ## 2. DESCRIPTION DU DATASET
 
-### Caractéristiques générales
-- **Nombre d'observations** : 284,807 transactions
-- **Période couverte** : Septembre 2013 (2 jours)
-- **Nombre de variables** : 31
-- **Variable cible** : Class (0 = légitime, 1 = frauduleuse)
+### 2.1 Caractéristiques générales
 
-### Types de variables
+* **Nombre d’observations** : 284 807 transactions
+* **Période couverte** : 2 jours (septembre 2013)
+* **Nombre de variables** : 31
+* **Variable cible** : `Class` (0 = légitime, 1 = fraude)
 
-**Variables transformées (PCA)** : V1, V2, V3, ..., V28
-- 28 composantes principales issues d'une transformation PCA
-- Variables anonymisées pour protéger la confidentialité des données
-- Représentent des caractéristiques cachées des transactions
+### 2.2 Types de variables
+
+**Variables transformées (PCA)** : `V1` à `V28`
+
+* 28 composantes principales issues d’une transformation PCA
+* Données anonymisées pour des raisons de confidentialité
 
 **Variables non transformées** :
-- **Time** : Secondes écoulées entre chaque transaction et la première du dataset
-- **Amount** : Montant de la transaction (en euros)
-- **Class** : Variable cible (0 = transaction normale, 1 = fraude)
 
-### Déséquilibre des classes
-- **Transactions légitimes** : 284,315 (99.827%)
-- **Transactions frauduleuses** : 492 (0.173%)
-- **Ratio** : environ 1 fraude pour 577 transactions légitimes
+* `Time` : secondes écoulées depuis la première transaction
+* `Amount` : montant de la transaction en euros
+* `Class` : variable cible
+
+### 2.3 Déséquilibre des classes
+
+* Transactions légitimes : **284 315 (99,827 %)**
+* Transactions frauduleuses : **492 (0,173 %)**
+* Ratio : **1 fraude pour 577 transactions légitimes**
 
 ---
 
 ## 3. CONTEXTE ET ENJEUX DE LA FRAUDE
 
-### Origine des données
-Les données proviennent de transactions réelles effectuées par des porteurs de cartes bancaires européens. Pour des raisons de confidentialité, les variables originales ont été transformées via PCA (Principal Component Analysis).
+### 3.1 Origine des données
 
-### Impact économique
-- **Pertes mondiales estimées** : Plus de 30 milliards de dollars par an
-- **Coût moyen d'une fraude** : Variable selon le montant et le type de transaction
-- **Coût des faux positifs** : Frustration client, perte de confiance, blocages injustifiés
+Les données proviennent de transactions réelles effectuées par des porteurs de cartes européens. Les variables ont été transformées par PCA afin de garantir la confidentialité.
 
-### Types de fraudes courants
-1. **Fraude par carte perdue/volée**
-2. **Fraude sans présence de carte** (e-commerce)
-3. **Skimming** (copie de carte)
-4. **Fraude par ingénierie sociale**
-5. **Fraude d'identité**
+### 3.2 Impact économique
 
-### Défis techniques
-- ⚠️ **Déséquilibre extrême** : Moins de 0.2% de fraudes
-- ⏱️ **Temps réel** : Décision en millisecondes
-- 💰 **Coût asymétrique** : Manquer une fraude coûte plus cher qu'un faux positif
-- 🔄 **Évolution constante** : Les fraudeurs adaptent leurs techniques
+* Pertes mondiales estimées : **> 30 milliards de dollars/an**
+* Coût élevé des fraudes non détectées
+* Coût indirect des faux positifs (insatisfaction client)
+
+### 3.3 Défis techniques
+
+* Déséquilibre extrême des classes
+* Nécessité de décisions en temps réel
+* Coût asymétrique des erreurs
+* Évolution continue des stratégies de fraude
 
 ---
 
 ## 4. ANALYSE EXPLORATOIRE DES DONNÉES
 
-### Statistiques descriptives de Amount
+### 4.1 Statistiques descriptives – Variable *Amount*
 
-| Statistique | Valeur |
-|-------------|--------|
-| Moyenne | €88.35 |
-| Médiane | €22.00 |
-| Écart-type | €250.12 |
-| Minimum | €0.00 |
-| Maximum | €25,691.16 |
+| Statistique | Valeur      |
+| ----------- | ----------- |
+| Moyenne     | 88,35 €     |
+| Médiane     | 22,00 €     |
+| Écart-type  | 250,12 €    |
+| Minimum     | 0,00 €      |
+| Maximum     | 25 691,16 € |
 
-### Distribution des montants
+### 4.2 Comparaison légitime vs fraude
 
-**Transactions légitimes** :
-- Médiane : €22.00
-- Montant moyen : €88.29
+* **Transactions légitimes** :
 
-**Transactions frauduleuses** :
-- Médiane : €9.25
-- Montant moyen : €122.21
+  * Moyenne : 88,29 €
+  * Médiane : 22,00 €
+* **Transactions frauduleuses** :
 
-**Observation clé** : Les transactions frauduleuses ont tendance à avoir des montants plus élevés en moyenne, mais une médiane plus faible, suggérant deux patterns distincts.
+  * Moyenne : 122,21 €
+  * Médiane : 9,25 €
 
-### Analyse temporelle
-- **Durée totale** : 172,792 secondes (~48 heures)
-- **Distribution** : Les fraudes ne montrent pas de pattern temporel évident
-- **Pics d'activité** : Variations normales du volume de transactions
+👉 Les fraudes présentent des montants moyens plus élevés mais une médiane plus faible, indiquant des comportements variés.
+
+### 4.3 Analyse temporelle
+
+* Durée totale : ~48 heures
+* Aucune périodicité claire des fraudes
 
 ---
 
 ## 5. VISUALISATIONS GRAPHIQUES
 
-### Code Python pour les graphiques
+Les graphiques suivants ont été générés :
 
-```python
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-from scipy import stats
+1. Distribution des classes
+2. Distribution des montants
+3. Boxplot des montants par classe
+4. Distribution temporelle des transactions
+5. Distribution des principales variables PCA
+6. Impact du rééquilibrage par SMOTE
+7. Comparaison des performances des modèles
+8. Analyse finale (ROC, Precision-Recall, matrice de confusion)
 
-# Chargement des données
-df = pd.read_csv('creditcard.csv')
-
-# Configuration style
-sns.set_style('whitegrid')
-plt.rcParams['figure.figsize'] = (14, 8)
-
-# ========================================
-# 1. DISTRIBUTION DES CLASSES
-# ========================================
-
-plt.figure(figsize=(10, 6))
-class_counts = df['Class'].value_counts()
-colors = ['#2ecc71', '#e74c3c']
-plt.bar(['Légitime', 'Fraude'], class_counts.values, color=colors, edgecolor='black', linewidth=1.5)
-plt.title('Distribution des Classes', fontsize=16, fontweight='bold')
-plt.ylabel('Nombre de Transactions', fontsize=12)
-plt.yscale('log')  # Échelle logarithmique pour mieux voir la différence
-for i, v in enumerate(class_counts.values):
-    plt.text(i, v, f'{v:,}\n({v/len(df)*100:.3f}%)', ha='center', va='bottom', fontweight='bold')
-plt.tight_layout()
-plt.show()
-
-# ========================================
-# 2. DISTRIBUTION DES MONTANTS
-# ========================================
-
-fig, axes = plt.subplots(1, 2, figsize=(16, 6))
-
-# Toutes les transactions
-axes[0].hist(df['Amount'], bins=50, color='steelblue', edgecolor='black', alpha=0.7)
-axes[0].set_xlabel('Montant (€)', fontsize=12)
-axes[0].set_ylabel('Fréquence', fontsize=12)
-axes[0].set_title('Distribution des Montants - Toutes Transactions', fontsize=14, fontweight='bold')
-axes[0].set_xlim([0, 1000])  # Limite pour meilleure visualisation
-
-# Comparaison Légitime vs Fraude
-legitimate = df[df['Class'] == 0]['Amount']
-fraud = df[df['Class'] == 1]['Amount']
-
-axes[1].hist(legitimate, bins=50, alpha=0.6, label='Légitime', color='green', edgecolor='black')
-axes[1].hist(fraud, bins=50, alpha=0.6, label='Fraude', color='red', edgecolor='black')
-axes[1].set_xlabel('Montant (€)', fontsize=12)
-axes[1].set_ylabel('Fréquence', fontsize=12)
-axes[1].set_title('Comparaison des Montants : Légitime vs Fraude', fontsize=14, fontweight='bold')
-axes[1].legend(fontsize=12)
-axes[1].set_xlim([0, 500])
-
-plt.tight_layout()
-plt.show()
-
-# ========================================
-# 3. BOXPLOT DES MONTANTS PAR CLASSE
-# ========================================
-
-plt.figure(figsize=(10, 6))
-sns.boxplot(x='Class', y='Amount', data=df, palette=['#2ecc71', '#e74c3c'])
-plt.xticks([0, 1], ['Légitime (0)', 'Fraude (1)'])
-plt.xlabel('Type de Transaction', fontsize=12)
-plt.ylabel('Montant (€)', fontsize=12)
-plt.title('Distribution des Montants par Classe', fontsize=14, fontweight='bold')
-plt.ylim([0, 300])  # Limite pour meilleure lisibilité
-plt.tight_layout()
-plt.show()
-
-# ========================================
-# 4. DISTRIBUTION TEMPORELLE
-# ========================================
-
-fig, axes = plt.subplots(2, 1, figsize=(14, 10))
-
-# Toutes les transactions
-axes[0].plot(df['Time'], df['Amount'], 'o', alpha=0.3, markersize=1, color='steelblue')
-axes[0].set_xlabel('Temps (secondes)', fontsize=12)
-axes[0].set_ylabel('Montant (€)', fontsize=12)
-axes[0].set_title('Distribution Temporelle des Transactions', fontsize=14, fontweight='bold')
-axes[0].set_ylim([0, 2000])
-
-# Focus sur les fraudes
-fraud_df = df[df['Class'] == 1]
-axes[1].scatter(fraud_df['Time'], fraud_df['Amount'], color='red', alpha=0.7, s=50, edgecolor='black')
-axes[1].set_xlabel('Temps (secondes)', fontsize=12)
-axes[1].set_ylabel('Montant (€)', fontsize=12)
-axes[1].set_title('Distribution Temporelle des Fraudes', fontsize=14, fontweight='bold')
-axes[1].grid(True, alpha=0.3)
-
-plt.tight_layout()
-plt.show()
-
-# ========================================
-# 5. DISTRIBUTION DES VARIABLES V1-V28
-# ========================================
-
-# Sélection de quelques variables PCA importantes
-important_features = ['V1', 'V2', 'V3', 'V4', 'V9', 'V10', 'V11', 'V12', 'V14', 'V16', 'V17', 'V18']
-
-fig, axes = plt.subplots(3, 4, figsize=(18, 12))
-axes = axes.ravel()
-
-for idx, feature in enumerate(important_features):
-    axes[idx].hist(df[df['Class'] == 0][feature], bins=50, alpha=0.6, label='Légitime', color='green', density=True)
-    axes[idx].hist(df[df['Class'] == 1][feature], bins=50, alpha=0.6, label='Fraude', color='red', density=True)
-    axes[idx].set_title(f'Distribution de {feature}', fontweight='bold')
-    axes[idx].legend()
-    axes[idx].set_ylabel('Densité')
-
-plt.suptitle('Distribution des Composantes PCA', fontsize=16, fontweight='bold', y=1.00)
-plt.tight_layout()
-plt.show()
-
-# ========================================
-# 6. STATISTIQUES DESCRIPTIVES
-# ========================================
-
-print("=" * 80)
-print("STATISTIQUES DESCRIPTIVES")
-print("=" * 80)
-
-print("\n📊 INFORMATIONS GÉNÉRALES :")
-print(f"Nombre total de transactions : {len(df):,}")
-print(f"Transactions légitimes : {len(df[df['Class']==0]):,} ({len(df[df['Class']==0])/len(df)*100:.3f}%)")
-print(f"Transactions frauduleuses : {len(df[df['Class']==1]):,} ({len(df[df['Class']==1])/len(df)*100:.3f}%)")
-
-print("\n💰 MONTANTS DES TRANSACTIONS :")
-print(f"\nToutes transactions :")
-print(f"  - Moyenne : €{df['Amount'].mean():.2f}")
-print(f"  - Médiane : €{df['Amount'].median():.2f}")
-print(f"  - Écart-type : €{df['Amount'].std():.2f}")
-print(f"  - Min : €{df['Amount'].min():.2f}")
-print(f"  - Max : €{df['Amount'].max():.2f}")
-
-legitimate_amount = df[df['Class'] == 0]['Amount']
-fraud_amount = df[df['Class'] == 1]['Amount']
-
-print(f"\nTransactions légitimes :")
-print(f"  - Moyenne : €{legitimate_amount.mean():.2f}")
-print(f"  - Médiane : €{legitimate_amount.median():.2f}")
-
-print(f"\nTransactions frauduleuses :")
-print(f"  - Moyenne : €{fraud_amount.mean():.2f}")
-print(f"  - Médiane : €{fraud_amount.median():.2f}")
-
-print("\n⏱️ INFORMATIONS TEMPORELLES :")
-print(f"Durée totale : {df['Time'].max():,} secondes (~{df['Time'].max()/3600:.1f} heures)")
-```
+*(Les fichiers sont exportés au format PNG pour exploitation dans un rapport ou une présentation.)*
 
 ---
 
-## 6. ANALYSE DE DÉSÉQUILIBRE DES CLASSES
+## 6. ANALYSE DU DÉSÉQUILIBRE DES CLASSES
 
-### Impact du déséquilibre
+### 6.1 Problèmes liés au déséquilibre
 
-Le déséquilibre extrême (99.827% vs 0.173%) pose plusieurs défis :
+* Modèles biaisés vers la classe majoritaire
+* Accuracy trompeuse
+* Difficulté d’apprentissage pour la classe minoritaire
 
-1. **Biais du modèle** : Tendance à prédire toujours "légitime"
-2. **Métriques trompeuses** : 99.83% d'accuracy en prédisant toujours 0
-3. **Apprentissage insuffisant** : Peu d'exemples de fraudes pour l'entraînement
+### 6.2 Techniques utilisées
 
-### Techniques de gestion du déséquilibre
+* **Sur-échantillonnage** : SMOTE
+* **Sous-échantillonnage** : Random Under-Sampling
 
-```python
-import pandas as pd
-import numpy as np
-from sklearn.model_selection import train_test_split
-from imblearn.over_sampling import SMOTE
-from imblearn.under_sampling import RandomUnderSampler
-from collections import Counter
-
-# Chargement des données
-df = pd.read_csv('creditcard.csv')
-
-X = df.drop('Class', axis=1)
-y = df['Class']
-
-# Split des données
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
-
-print("=" * 80)
-print("TECHNIQUES DE GESTION DU DÉSÉQUILIBRE")
-print("=" * 80)
-
-print(f"\n📊 Distribution originale :")
-print(f"Classe 0 (Légitime) : {sum(y_train == 0):,}")
-print(f"Classe 1 (Fraude) : {sum(y_train == 1):,}")
-print(f"Ratio : {sum(y_train == 0) / sum(y_train == 1):.1f}:1")
-
-# ========================================
-# TECHNIQUE 1 : SMOTE (Over-sampling)
-# ========================================
-
-print("\n" + "=" * 80)
-print("1️⃣ SMOTE (Synthetic Minority Over-sampling)")
-print("=" * 80)
-
-smote = SMOTE(random_state=42)
-X_train_smote, y_train_smote = smote.fit_resample(X_train, y_train)
-
-print(f"Après SMOTE :")
-print(f"Classe 0 : {sum(y_train_smote == 0):,}")
-print(f"Classe 1 : {sum(y_train_smote == 1):,}")
-print(f"Ratio : 1:1 (équilibré)")
-
-# ========================================
-# TECHNIQUE 2 : Under-sampling
-# ========================================
-
-print("\n" + "=" * 80)
-print("2️⃣ Random Under-sampling")
-print("=" * 80)
-
-rus = RandomUnderSampler(random_state=42)
-X_train_rus, y_train_rus = rus.fit_resample(X_train, y_train)
-
-print(f"Après Under-sampling :")
-print(f"Classe 0 : {sum(y_train_rus == 0):,}")
-print(f"Classe 1 : {sum(y_train_rus == 1):,}")
-print(f"Ratio : 1:1 (équilibré)")
-
-# ========================================
-# VISUALISATION
-# ========================================
-
-import matplotlib.pyplot as plt
-
-fig, axes = plt.subplots(1, 3, figsize=(18, 5))
-
-# Original
-axes[0].bar(['Légitime', 'Fraude'], [sum(y_train == 0), sum(y_train == 1)], 
-            color=['green', 'red'], edgecolor='black', linewidth=1.5)
-axes[0].set_title('Distribution Originale', fontsize=14, fontweight='bold')
-axes[0].set_ylabel('Nombre de samples')
-axes[0].set_yscale('log')
-
-# SMOTE
-axes[1].bar(['Légitime', 'Fraude'], [sum(y_train_smote == 0), sum(y_train_smote == 1)], 
-            color=['green', 'red'], edgecolor='black', linewidth=1.5)
-axes[1].set_title('Après SMOTE', fontsize=14, fontweight='bold')
-axes[1].set_ylabel('Nombre de samples')
-
-# Under-sampling
-axes[2].bar(['Légitime', 'Fraude'], [sum(y_train_rus == 0), sum(y_train_rus == 1)], 
-            color=['green', 'red'], edgecolor='black', linewidth=1.5)
-axes[2].set_title('Après Under-sampling', fontsize=14, fontweight='bold')
-axes[2].set_ylabel('Nombre de samples')
-
-plt.tight_layout()
-plt.show()
-```
+👉 SMOTE a été retenu pour conserver l’information tout en équilibrant les classes.
 
 ---
 
 ## 7. MODÈLES DE CLASSIFICATION
 
-### Code Python pour les modèles
+### 7.1 Modèles testés
 
-```python
-import pandas as pd
-import numpy as np
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LogisticRegression
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
-from sklearn.svm import SVC
-from xgboost import XGBClassifier
-from sklearn.metrics import (
-    accuracy_score, precision_score, recall_score, f1_score,
-    roc_auc_score, confusion_matrix, classification_report,
-    roc_curve, precision_recall_curve
-)
-from imblearn.over_sampling import SMOTE
-import matplotlib.pyplot as plt
-import seaborn as sns
+* Régression Logistique
+* Arbre de Décision
+* Random Forest
+* Gradient Boosting
+* XGBoost
 
-# ========================================
-# 1. PRÉPARATION DES DONNÉES
-# ========================================
+### 7.2 Métriques d’évaluation
 
-df = pd.read_csv('creditcard.csv')
+* Accuracy
+* Precision
+* Recall (prioritaire)
+* F1-score
+* ROC-AUC
 
-X = df.drop('Class', axis=1)
-y = df['Class']
+### 7.3 Résultats synthétiques attendus
 
-# Split train/test
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42, stratify=y
-)
+| Modèle            | Accuracy | Precision | Recall    | F1-score  | ROC-AUC |
+| ----------------- | -------- | --------- | --------- | --------- | ------- |
+| Random Forest     | ~0,9995  | 0,95–0,98 | 0,85–0,92 | 0,90–0,95 | >0,97   |
+| XGBoost           | ~0,9996  | 0,96–0,99 | 0,88–0,94 | 0,92–0,96 | >0,98   |
+| Gradient Boosting | ~0,9994  | 0,94–0,97 | 0,83–0,90 | 0,88–0,93 | >0,96   |
 
-# Normalisation
-scaler = StandardScaler()
-X_train_scaled = scaler.fit_transform(X_train)
-X_test_scaled = scaler.transform(X_test)
-
-# Application de SMOTE
-smote = SMOTE(random_state=42)
-X_train_balanced, y_train_balanced = smote.fit_resample(X_train_scaled, y_train)
-
-print("=" * 80)
-print("PRÉPARATION DES DONNÉES")
-print("=" * 80)
-print(f"✓ Taille du dataset : {len(df):,} transactions")
-print(f"✓ Train set : {len(X_train):,} samples")
-print(f"✓ Test set : {len(X_test):,} samples")
-print(f"✓ Train set après SMOTE : {len(X_train_balanced):,} samples")
-print(f"✓ Distribution après SMOTE : {Counter(y_train_balanced)}")
-
-# ========================================
-# 2. DÉFINITION DES MODÈLES
-# ========================================
-
-models = {
-    'Logistic Regression': LogisticRegression(max_iter=1000, random_state=42),
-    'Decision Tree': DecisionTreeClassifier(max_depth=10, random_state=42),
-    'Random Forest': RandomForestClassifier(n_estimators=100, max_depth=15, random_state=42),
-    'Gradient Boosting': GradientBoostingClassifier(n_estimators=100, learning_rate=0.1, random_state=42),
-    'XGBoost': XGBClassifier(n_estimators=100, learning_rate=0.1, max_depth=5, random_state=42, eval_metric='logloss')
-}
-
-# ========================================
-# 3. ENTRAÎNEMENT ET ÉVALUATION
-# ========================================
-
-results = []
-predictions = {}
-probabilities = {}
-
-print("\n" + "=" * 80)
-print("ENTRAÎNEMENT ET ÉVALUATION DES MODÈLES")
-print("=" * 80)
-
-for name, model in models.items():
-    print(f"\n🔄 Entraînement : {name}...")
-    
-    # Entraînement
-    model.fit(X_train_balanced, y_train_balanced)
-    
-    # Prédictions
-    y_pred = model.predict(X_test_scaled)
-    y_pred_proba = model.predict_proba(X_test_scaled)[:, 1] if hasattr(model, 'predict_proba') else None
-    
-    predictions[name] = y_pred
-    probabilities[name] = y_pred_proba
-    
-    # Calcul des métriques
-    accuracy = accuracy_score(y_test, y_pred)
-    precision = precision_score(y_test, y_pred)
-    recall = recall_score(y_test, y_pred)
-    f1 = f1_score(y_test, y_pred)
-    roc_auc = roc_auc_score(y_test, y_pred_proba) if y_pred_proba is not None else 0
-    
-    results.append({
-        'Modèle': name,
-        'Accuracy': accuracy,
-        'Precision': precision,
-        'Recall': recall,
-        'F1-Score': f1,
-        'ROC-AUC': roc_auc
-    })
-    
-    print(f"  ✓ Accuracy : {accuracy:.4f}")
-    print(f"  ✓ Precision : {precision:.4f}")
-    print(f"  ✓ Recall : {recall:.4f}")
-    print(f"  ✓ F1-Score : {f1:.4f}")
-    print(f"  ✓ ROC-AUC : {roc_auc:.4f}")
-
-# ========================================
-# 4. TABLEAU RÉCAPITULATIF
-# ========================================
-
-results_df = pd.DataFrame(results).sort_values('F1-Score', ascending=False)
-
-print("\n" + "=" * 80)
-print("TABLEAU RÉCAPITULATIF DES PERFORMANCES")
-print("=" * 80)
-print(results_df.to_string(index=False))
-
-# ========================================
-# 5. VISUALISATIONS
-# ========================================
-
-# Graphique de comparaison des métriques
-fig, axes = plt.subplots(2, 2, figsize=(16, 12))
-
-metrics = ['Accuracy', 'Precision', 'Recall', 'F1-Score']
-colors = ['#3498db', '#e74c3c', '#2ecc71', '#f39c12']
-
-for idx, metric in enumerate(metrics):
-    ax = axes[idx // 2, idx % 2]
-    sorted_df = results_df.sort_values(metric, ascending=True)
-    ax.barh(sorted_df['Modèle'], sorted_df[metric], color=colors[idx], edgecolor='black', linewidth=1.5)
-    ax.set_xlabel(metric, fontsize=12, fontweight='bold')
-    ax.set_xlim([0, 1])
-    ax.set_title(f'Comparaison : {metric}', fontsize=14, fontweight='bold')
-    
-    # Ajout des valeurs sur les barres
-    for i, v in enumerate(sorted_df[metric]):
-        ax.text(v + 0.01, i, f'{v:.3f}', va='center', fontweight='bold')
-
-plt.tight_layout()
-plt.show()
-
-# ========================================
-# 6. MATRICE DE CONFUSION (MEILLEUR MODÈLE)
-# ========================================
-
-best_model_name = results_df.iloc[0]['Modèle']
-best_predictions = predictions[best_model_name]
-
-print(f"\n🏆 Meilleur modèle : {best_model_name}")
-
-cm = confusion_matrix(y_test, best_predictions)
-
-plt.figure(figsize=(8, 6))
-sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', cbar=True,
-            xticklabels=['Légitime', 'Fraude'],
-            yticklabels=['Légitime', 'Fraude'],
-            annot_kws={'size': 16, 'weight': 'bold'})
-plt.title(f'Matrice de Confusion - {best_model_name}', fontsize=14, fontweight='bold')
-plt.ylabel('Valeur Réelle', fontsize=12)
-plt.xlabel('Valeur Prédite', fontsize=12)
-plt.tight_layout()
-plt.show()
-
-# Affichage détaillé de la matrice
-TN, FP, FN, TP = cm.ravel()
-print(f"\n📊 Détails de la matrice de confusion :")
-print(f"  • True Negatives (TN)  : {TN:,} (vraies légitimes)")
-print(f"  • False Positives (FP) : {FP:,} (fausses alertes)")
-print(f"  • False Negatives (FN) : {FN:,} (fraudes manquées) ⚠️")
-print(f"  • True Positives (TP)  : {TP:,} (fraudes détectées) ✓")
-
-# ========================================
-# 7. COURBE ROC
-# ========================================
-
-plt.figure(figsize=(10, 8))
-
-for name, proba in probabilities.items():
-    if proba is not None:
-        fpr, tpr, _ = roc_curve(y_test, proba)
-        auc = roc_auc_score(y_test, proba)
-        plt.plot(fpr, tpr, label=f'{name} (AUC = {auc:.3f})', linewidth=2)
-
-plt.plot([0, 1], [0, 1], 'k--', label='Hasard (AUC = 0.500)', linewidth=2)
-plt.xlabel('Taux de Faux Positifs', fontsize=12)
-plt.ylabel('Taux de Vrais Positifs', fontsize=12)
-plt.title('Courbes ROC - Comparaison des Modèles', fontsize=14, fontweight='bold')
-plt.legend(loc='lower right', fontsize=10)
-plt.grid(True, alpha=0.3)
-plt.tight_layout()
-plt.show()
-
-# ========================================
-# 8. COURBE PRECISION-RECALL
-# ========================================
-
-plt.figure(figsize=(10, 8))
-
-for name, proba in probabilities.items():
-    if proba is not None:
-        precision_vals, recall_vals, _ = precision_recall_curve(y_test, proba)
-        plt.plot(recall_vals, precision_vals, label=name, linewidth=2)
-
-plt.xlabel('Recall', fontsize=12)
-plt.ylabel('Precision', fontsize=12)
-plt.title('Courbes Precision-Recall', fontsize=14, fontweight='bold')
-plt.legend(loc='lower left', fontsize=10)
-plt.grid(True, alpha=0.3)
-plt.tight_layout()
-plt.show()
-
-# ========================================
-# 9. RAPPORT DE CLASSIFICATION
-# ========================================
-
-print("\n" + "=" * 80)
-print(f"RAPPORT DE CLASSIFICATION DÉTAILLÉ - {best_model_name}")
-print("=" * 80)
-print(classification_report(y_test, best_predictions, target_names=['Légitime', 'Fraude']))
-
-print("\n✓ Analyse de classification terminée")
-```
-
-### Résultats attendus
-
-Les modèles basés sur les ensembles obtiennent généralement les meilleures performances :
-
-| Métrique | Random Forest | XGBoost | Gradient Boosting |
-|----------|---------------|---------|-------------------|
-| **Accuracy** | 0.9995 | 0.9996 | 0.9994 |
-| **Precision** | 0.95 - 0.98 | 0.96 - 0.99 | 0.94 - 0.97 |
-| **Recall** | 0.85 - 0.92 | 0.88 - 0.94 | 0.83 - 0.90 |
-| **F1-Score** | 0.90 - 0.95 | 0.92 - 0.96 | 0.88 - 0.93 |
-| **ROC-AUC** | 0.97 - 0.99 | 0.98 - 0.99 | 0.96 - 0.98 |
+👉 **XGBoost** et **Random Forest** offrent les meilleures performances globales.
 
 ---
 
-## 8. CONCLUSION
+## 8. CONCLUSION ET RECOMMANDATIONS
 
-### Points clés
+### 8.1 Conclusions
 
-✅ **Dataset réaliste** : 284,807 transactions authentiques avec anonymisation PCA  
-✅ **Défi majeur** : Déséquilibre extrême (0.173% de fraudes)  
-✅ **Techniques essentielles** : SMOTE, ajustement des seuils, métriques adaptées  
-✅ **Modèles performants** : XGBoost et Random Forest excellent avec ROC-AUC > 0.98  
-✅ **Métrique prioritaire** : Le Recall est crucial (minimiser les fraudes manquées)
+* Dataset réaliste et largement utilisé en recherche
+* Déséquilibre extrême nécessitant des techniques spécifiques
+* Les modèles d’ensemble dominent en performance
+* Le **Recall** est la métrique clé en détection de fraude
 
-### Recommandations
+### 8.2 Recommandations
 
-1. **Feature Engineering**
-   - Créer des agrégations temporelles (transactions par heure/jour)
-   - Calculer des statistiques par utilisateur (fréquence, montant moyen)
-   - Analyser les patterns de comportement
+1. **Feature engineering** : agrégations temporelles, statistiques par utilisateur
+2. **Optimisation des seuils** selon les coûts métier
+3. **Validation robuste** (cross-validation stratifiée)
+4. **Déploiement temps réel** avec monitoring continu
+5. **Réentraînement régulier** pour suivre l’évolution des fraudes
 
-2. **Optimisation des seuils**
-   - Ajuster le seuil de décision selon le coût métier
-   - Privilégier le Recall pour minimiser les fraudes manquées
-   - Équilibrer avec les faux positifs pour l'expérience client
+### 8.3 Applications pratiques
 
-3. **Validation robuste**
-   - Validation croisée stratifiée
-   - Évaluation sur données temporellement séparées
-   - Tests sur nouveaux types de fraudes
+* Systèmes bancaires de détection en temps réel
+* Scoring de risque transactionnel
+* Analyse forensique post-fraude
+* Réduction des contrôles manuels
 
-4. **Déploiement en production**
-   - Scoring en temps réel (< 100ms)
-   - Système de règles métier complémentaire
-   - Monitoring continu des performances
-   - Réentraînement régulier du modèle
+---
 
-5. **Gestion des coûts**
-   - Coût d'une fraude manquée : élevé (perte du montant + frais)
-   - Coût d'un faux positif : modéré (friction client)
-   - Optimiser selon la matrice de coûts métier
-
-### Applications pratiques
-
-- 🏦 **Systèmes bancaires** : Détection en temps réel des transactions suspectes
-- 💳 **Émetteurs de cartes** : Scoring de risque pour chaque transaction
-- 🛡️ **Prévention** : Identification des patterns de fraude émergents
-- 📊 **Analyse forensique** : Investigation post-fraude
-- 🤖 **Automatisation** : Réduction de la révision manuelle
-
-### Lim
+**✔ Analyse terminée avec succès**
 
 
 
