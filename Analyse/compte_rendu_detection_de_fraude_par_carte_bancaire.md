@@ -187,3 +187,14 @@ Les graphiques suivants ont été générés :
 
 **✔ Analyse terminée avec succès**
 
+
+
+
+
+| Classe    | Description             | Nombre      | Pourcentage |
+| --------- | ----------------------- | ----------- | ----------- |
+| 0         | Transaction légitime    | 284 315     | 99,83 %     |
+| 1         | Transaction frauduleuse | 492         | 0,17 %      |
+| **Total** |                         | **284 807** | **100 %**   |
+
+
