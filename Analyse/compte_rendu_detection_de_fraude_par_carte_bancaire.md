@@ -227,6 +227,23 @@ Des tableaux
 
 
 Representation Graphique 
+
+
+
+
 <img width="597" height="436" alt="image" src="https://github.com/user-attachments/assets/e05b99f4-d41a-4471-83a8-9d8e9b2e6b05" />
 
+
+
+<img width="452" height="411" alt="image" src="https://github.com/user-attachments/assets/e2389496-ff8b-4c55-92ca-730f1bf76557" />
+
+
+
+
+
+<img width="592" height="455" alt="image" src="https://github.com/user-attachments/assets/7cb35f86-2577-4eef-9d3d-7fa632445f26" />
+
+
+
+<img width="580" height="436" alt="image" src="https://github.com/user-attachments/assets/a5a66f30-5c65-499a-afe1-40ace254a030" />
 
