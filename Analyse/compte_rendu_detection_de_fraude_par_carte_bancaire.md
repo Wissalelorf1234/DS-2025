@@ -185,8 +185,7 @@ Les graphiques suivants ont été générés :
 
 ---
 
-**✔ Analyse terminée avec succès**
-
+Des tableaux 
 
 
 
@@ -196,5 +195,36 @@ Les graphiques suivants ont été générés :
 | 0         | Transaction légitime    | 284 315     | 99,83 %     |
 | 1         | Transaction frauduleuse | 492         | 0,17 %      |
 | **Total** |                         | **284 807** | **100 %**   |
+
+
+
+📋 Tableau  : Statistiques descriptives de Amount
+
+
+| Classe   | Moyenne (€) | Médiane (€) | Min (€) | Max (€) |
+| -------- | ----------- | ----------- | ------- | ------- |
+| Légitime | 88,29       | 22,00       | 0,00    | 25 691  |
+| Fraude   | 122,21      | 9,25        | 0,00    | 2 125   |
+
+📋 Tableau 3 : Techniques de traitement du déséquilibre
+
+
+| Méthode        | Principe                     | Avantages              | Inconvénients              |
+| -------------- | ---------------------------- | ---------------------- | -------------------------- |
+| SMOTE          | Sur-échantillonnage          | Conserve l’information | Risque de surapprentissage |
+| Under-sampling | Réduction classe majoritaire | Rapide                 | Perte d’information        |
+
+
+📋 Tableau 4 : Résultats des modèles
+
+
+| Modèle                | Accuracy | Precision | Recall | F1-score |
+| --------------------- | -------- | --------- | ------ | -------- |
+| Régression logistique | 0,998    | 0,89      | 0,78   | 0,83     |
+| Random Forest         | 0,9995   | 0,97      | 0,91   | 0,94     |
+| XGBoost               | 0,9996   | 0,98      | 0,93   | 0,95     |
+
+
+
 
 
