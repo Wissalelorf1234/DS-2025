@@ -1,8 +1,7 @@
-Parfait, allons plus en profondeur et enrichissons le rapport avec davantage de détails techniques et contextuels. Voici une version plus développée :
 
 ---
 
-# 📊 Rapport Détaillé : Prédiction de la Volatilité des Actions Cotées
+ Prédiction de la Volatilité des Actions Cotées
 
 ## 1. Introduction
 La volatilité est une mesure statistique de la dispersion des rendements d’un actif financier. Elle traduit l’incertitude et le risque associés aux mouvements de prix.  
@@ -100,4 +99,3 @@ Les modèles traditionnels (ARCH/GARCH) restent une référence, mais l’intég
 
 ---
 
-comment telecharger se forma macdawn
